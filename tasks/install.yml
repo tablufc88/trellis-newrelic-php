@@ -2,18 +2,17 @@
 - name: Trust New Relic GPG key
   apt_key:
     url: 'https://download.newrelic.com/548C16BF.gpg'
+    state: present
 
 - name: Configure New Relic apt repository
   apt_repository:
     repo: 'deb http://apt.newrelic.com/debian/ newrelic non-free'
-
-- name: Update apt cache
-  apt:
+    state: present
     update_cache: yes
 
 - name: Install New Relic PHP agent
   apt:
     name: newrelic-php5
-    state: "{{ newrelic_package_state }}"
+    state: present
     update_cache: yes
     cache_valid_time: "{{ apt_cache_valid_time }}"
